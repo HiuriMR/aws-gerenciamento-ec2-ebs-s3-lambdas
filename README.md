@@ -56,6 +56,30 @@ Fluxo representado no laboratório:
 
 ---
 
+# Arquitetura AWS: EC2 + EBS + RDS e S3 + Lambda + DynamoDB
+
+Este projeto descreve uma arquitetura híbrida que combina **infraestrutura tradicional** (EC2, EBS, RDS) com **componentes serverless** (S3, Lambda, DynamoDB).  
+O objetivo é mostrar como dados podem ser processados em uma aplicação hospedada em EC2 e, em seguida, enviados para o S3, onde funções Lambda automatizam o processamento e armazenam resultados no DynamoDB.
+
+---
+
+## 🔗 Fluxo de Dados
+
+### 1. Usuário acessa a aplicação
+- O **Actor** representa o usuário que interage com a **Web Application**.
+- A aplicação roda em uma instância **EC2**.
+
+### 2. EC2 com EBS e RDS
+- O **EC2** utiliza volumes **EBS** como discos rígidos para armazenar arquivos e dados temporários.
+- O **RDS** é usado como banco de dados relacional para dados estruturados (ex.: usuários, pedidos).
+
+### 3. Transferência de arquivos para o S3
+- Arquivos gerados ou manipulados pelo EC2 são enviados para o **S3** usando o **AWS CLI** ou SDK.
+- Exemplo de comando:
+  ```bash
+  aws s3 cp /mnt/ebs/arquivo.txt s3://meu-bucket/
+
+
 ## ✅ Conclusão
 
 Este desafio consolida os conceitos de **infraestrutura tradicional (EC2, EBS, RDS)** e **serverless (S3, Lambda, DynamoDB)**, mostrando como integrar diferentes serviços da AWS em uma arquitetura prática e escalável.
